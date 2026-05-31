@@ -114,7 +114,7 @@ Suricata successfully detected the HTTP 404 response and generated an alert.
 
 ---
 
-## 6. Executable Download Detection
+## 4. Executable Download Detection
 
 Implemented a rule detecting downloads of executable files over HTTP.
 
@@ -136,3 +136,48 @@ During the download, Suricata inspected the HTTP request and detected the `.exe`
 
 ---
 
+## 5. Tor Domain Detection
+
+Implemented a rule blocking DNS queries for domains ending with `.onion`.
+
+### Test
+
+The detection was validated by generating a DNS lookup request from the Kali VM.
+
+![Tor Domain Test](screenshots/onion-test.png)
+
+### Result
+
+The DNS query was blocked and logged by Suricata.
+
+![Tor Domain Detection](screenshots/onion-alert.png)
+
+---
+
+## 6. Shellshock Exploitation Detection
+
+Implemented a Suricata rule designed to detect and block Shellshock exploitation attempts by inspecting HTTP headers for the characteristic payload pattern `() {`.
+
+### Test
+
+A simple HTTP server was started on Kali Suricata to simulate a web application endpoint.
+
+![HTTP Server](screenshots/shellshock-server.png)
+
+The detection was validated by sending an HTTP request from the Kali VM containing a Shellshock payload in the `User-Agent` header.
+
+![Shellshock Test](screenshots/shellshock-test.png)
+
+### Result
+
+Suricata successfully detected the Shellshock payload, blocked the request, and generated an alert indicating an exploitation attempt.
+
+![Shellshock Detection](screenshots/shellshock-alert.png)
+
+---
+
+# Key Learning Outcomes
+
+Through this project, I gained practical experience in deploying and operating a network-based IDPS, creating custom Suricata rules, analyzing network traffic, and testing detection capabilities against common attack techniques.
+
+This project will continue to evolve with additional detection rules, new attack scenarios, and further experimentation with Suricata to expand its detection and prevention capabilities.

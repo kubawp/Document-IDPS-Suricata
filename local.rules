@@ -1,0 +1,6 @@
+alert tcp any any -> $HOME_NET 100:1000 (msg:"PORTSCAN 100:1000"; flags:S; sid:1000001; rev:1;)
+drop tcp any any -> $HOME_NET 22 (msg:"Zablokowano brute-force SSH"; flags:S; threshold:type both, track by_src, count 10, seconds 30; sid:1000002; rev:1;)
+alert http any any -> any any (msg:"Wykryto błąd 404"; http.stat_code; content:"404"; sid:1000003; rev:1;)
+alert http any any -> any any (msg:"EXE download"; http.uri; content:".exe"; sid:1000006; rev:1;)
+drop dns any any -> any any (msg:"Zablokowane zapytanie o domenę .onion"; dns.query; content:".onion"; nocase; sid:1000007; rev:1;)
+drop http any any -> $HOME_NET any (msg:"Shellshock attempt blocked"; http.header; content:"() {"; sid:1000008; rev:1;)

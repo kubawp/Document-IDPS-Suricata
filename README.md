@@ -19,8 +19,8 @@ The project demonstrates practical experience with intrusion detection, intrusio
 
 ```mermaid
 flowchart TD
-    A[Kali Live<br>Attack Machine]
-    B[Kali VM<br>Suricata Network IDPS]
+    A[Kali VM<br>Attack Machine<br>10.0.2.15]
+    B[Kali Suricata<br>Suricata Network IDPS<br>10.0.2.14]
 
     A -->|Attack Traffic| B
 ```
@@ -48,3 +48,47 @@ A dedicated `local.rules` file was created and loaded through the Suricata confi
 The configuration was verified before deployment using Suricata test mode.
 
 ![Configuration Validation](screenshots/suricata-validation.png)
+
+---
+
+# Detection & Prevention Rules
+
+## 1. Port Scan Detection
+
+Implemented a custom Suricata rule to detect TCP SYN scans targeting ports between 100 and 1000.
+
+### Test
+
+The rule was validated by performing a TCP SYN port scan from the Kali VM machine against the Kali Suricata machine using Nmap.
+
+```bash
+nmap -sS -p 100-1100 10.0.2.14
+```
+![Nmap Port Scan](screenshots/portscan-test.png)
+
+### Result
+
+Suricata successfully detected the scan activity and generated alerts for connections targeting ports within the configured range.
+
+![Port Scan Detection](screenshots/portscan-alert.png)
+
+---
+
+## 2. SSH Brute-Force Detection
+
+Implemented a rule that detects excessive SSH login attempts originating from a single source.
+
+### Test
+
+```bash
+hydra -l admin -P rockyou.txt ssh://10.0.2.14
+```
+
+### Result
+
+The attack was detected and blocked after exceeding the configured threshold.
+
+![SSH Brute Force Detection](screenshots/bruteforce-alert.png)
+
+---
+

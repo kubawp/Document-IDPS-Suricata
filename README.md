@@ -144,7 +144,7 @@ During the download, Suricata inspected the HTTP request and detected the `.exe`
 
 ## 5. Tor Domain Prevention
 
-Implemented a rule blocking DNS queries for domains ending with `.onion`.
+In the next step, a rule was created to detect and block DNS requests for `.onion` domains, which are commonly associated with Tor hidden services.
 
 ### Test
 

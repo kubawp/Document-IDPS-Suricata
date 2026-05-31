@@ -1,6 +1,6 @@
 # Document-IDPS-Suricata
 
-Implementation of an Intrusion Detection and Prevention System (IDS/IPS) using Suricata. Developed and tested custom detection rules for various attack scenarios including port scanning, SSH brute-force, HTTP anomalies, TCP flag manipulation, and exploit detection.
+Implementation of an Intrusion Detection and Prevention System (IDS/IPS) using Suricata. Developed and tested custom detection rules for various attack scenarios including port scanning, SSH brute-force, HTTP anomalies and exploit detection.
 
 # Project Overview
 
@@ -80,7 +80,7 @@ Suricata successfully detected the scan activity and generated alerts for connec
 
 ---
 
-## 2. SSH Brute-Force Detection
+## 2. SSH Brute-Force Prevention
 
 Implemented a Suricata rule designed to detect and block SSH brute-force attacks. The rule triggers when more than 10 connection attempts are made from the same source IP address within a 30-second time window.
 
@@ -142,7 +142,7 @@ During the download, Suricata inspected the HTTP request and detected the `.exe`
 
 ---
 
-## 5. Tor Domain Detection
+## 5. Tor Domain Prevention
 
 Implemented a rule blocking DNS queries for domains ending with `.onion`.
 
@@ -160,7 +160,7 @@ The DNS query was blocked and logged by Suricata.
 
 ---
 
-## 6. Shellshock Exploitation Detection
+## 6. Shellshock Exploitation Prevention
 
 Implemented a Suricata rule designed to detect and block Shellshock exploitation attempts by inspecting HTTP headers for the characteristic payload pattern `() {`.
 

@@ -49,6 +49,12 @@ The configuration was verified before deployment using Suricata test mode.
 
 ![Configuration Validation](screenshots/suricata-validation.png)
 
+# Custom Rules
+
+All custom Suricata rules used in this project are available in the [`local.rules`](local.rules) file.
+
+The rule set includes detection and prevention logic for port scanning, SSH brute-force attempts, HTTP 404 responses, executable downloads, `.onion` DNS queries, and Shellshock exploitation attempts.
+
 ---
 
 # Detection & Prevention Rules

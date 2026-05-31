@@ -76,19 +76,63 @@ Suricata successfully detected the scan activity and generated alerts for connec
 
 ## 2. SSH Brute-Force Detection
 
-Implemented a rule that detects excessive SSH login attempts originating from a single source.
+Implemented a Suricata rule designed to detect and block SSH brute-force attacks. The rule triggers when more than 10 connection attempts are made from the same source IP address within a 30-second time window.
 
 ### Test
+
+The detection was validated by performing a dictionary-based SSH brute-force attack from the Kali VM against the SSH service running on Kali Suricata using Hydra.
 
 ```bash
 hydra -l admin -P rockyou.txt ssh://10.0.2.14
 ```
 
+![SSH Brute Force Attack](screenshots/bruteforce-test.png)
+
 ### Result
 
-The attack was detected and blocked after exceeding the configured threshold.
+After exceeding the configured threshold of 10 connection attempts within 30 seconds, Suricata generated an alert and blocked further connection attempts originating from the attacking host.
 
 ![SSH Brute Force Detection](screenshots/bruteforce-alert.png)
+
+---
+
+## 3. HTTP 404 Detection
+
+Implemented a rule that detects HTTP responses returning status code 404.
+
+### Test
+
+The rule was validated by generating a request from the Kali VM to a non-existent resource on Google, resulting in an HTTP 404 response.
+
+![HTTP 404 Test](screenshots/http404-test.png)
+
+### Result
+
+Suricata successfully detected the HTTP 404 response and generated an alert.
+
+![HTTP 404 Detection](screenshots/http404-alert.png)
+
+---
+
+## 6. Executable Download Detection
+
+Implemented a rule detecting downloads of executable files over HTTP.
+
+### Test
+
+To simulate an executable download, a simple HTTP server was started on the Kali VM using Python.
+
+![HTTP Server](screenshots/exe-server.png)
+
+A test executable file was then downloaded from the Kali Suricata machine using `wget`.
+
+![Executable Download Test](screenshots/exe-download-test.png)
+
+### Result
+
+During the download, Suricata inspected the HTTP request and detected the `.exe` file transfer. The event was successfully logged and an alert was generated in `fast.log`.
+
+![Executable Download Detection](screenshots/exe-alert.png)
 
 ---
 

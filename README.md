@@ -132,7 +132,7 @@ A test executable file was then downloaded from the Kali Suricata machine using 
 
 During the download, Suricata inspected the HTTP request and detected the `.exe` file transfer. The event was successfully logged and an alert was generated in `fast.log`.
 
-![Executable Download Detection](screenshots/exe-alert.png)
+![Executable Download Detection](screenshots/exe-alertt.png)
 
 ---
 

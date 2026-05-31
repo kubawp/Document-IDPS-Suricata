@@ -17,19 +17,10 @@ The project demonstrates practical experience with intrusion detection, intrusio
 
 # Lab Architecture
 
-```text
-┌─────────────────────┐
-│      Kali Live      │
-│                     │
-│   Attack Machine    │
-└──────────┬──────────┘
-           │
-           │ Attack Traffic
-           ▼
-┌─────────────────────┐
-│       Kali VM       │
-│                     │
-│      Suricata       │
-│        IDPS         │
-└─────────────────────┘
+```mermaid
+flowchart TD
+    A[Kali Live<br>Attack Machine]
+    B[Suricata Network IDPS<br>Kali VM]
+
+    A -->|Attack Traffic| B
 ```
